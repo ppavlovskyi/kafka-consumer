@@ -18,7 +18,18 @@ public class KafkaConsumerApplication {
 	
 	@Bean
 	Consumer<PulseDto> log(){
-		return t->System.out.println("Result: "+t);
+		return t -> {
+            try {
+                if (t == null) {
+                    System.err.println("Received null message");
+                } else {
+                    System.out.println("Result: " + t);
+                }
+            } catch (Exception e) {
+//                System.err.println("Error message: " + e.getMessage());
+//                e.printStackTrace();
+            }
+        };
 	}
 	
 
